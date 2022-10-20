@@ -37,14 +37,11 @@ fastlane match init
 
 ### Matchfile 파일 설정
 ```
-git_url("http://sample-git.com/sample-ios")
-
-storage_mode("git")
-
-type("development") # The default type, can be: appstore, adhoc, enterprise or development
-
 app_identifier(["******"]) # The bundle identifier of your app
 username("******@gmail.com") # Your Apple Developer Portal username
+
+git_url("http://sample-git.com/sample-ios")
+storage_mode("git")
 
 # For all available options run `fastlane match --help`
 # Remove the # in the beginning of the line to enable the other options
