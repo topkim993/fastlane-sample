@@ -38,7 +38,6 @@ fastlane match init
 ### Matchfile 파일 설정
 ```
 app_identifier(["******"]) # The bundle identifier of your app
-username("******@gmail.com") # Your Apple Developer Portal username
 
 git_url("http://sample-git.com/sample-ios")
 storage_mode("git")
@@ -79,7 +78,11 @@ platform :ios do
       duration: 1200, # optional (maximum 1200)
       in_house: false # optional but may be required if using match/sigh
     )
-    match(type: "appstore", force_for_new_devices: true)
+    match(
+      api_key: api_key,
+      type: "appstore", 
+      force_for_new_devices: true
+    )
     build_app(
       workspace: "Sample.xcworkspace", 
       scheme: "Sample",
@@ -91,7 +94,18 @@ platform :ios do
   end
   desc "Push a new stage build to App Distribution"
   lane :stage do
-    match(type: "development", force_for_new_devices: true)
+    api_key = app_store_connect_api_key(
+      key_id: "H7FWG43W39",
+      issuer_id: "69a6de74-5086-47e3-e053-5b8c7c11a4d1",
+      key_filepath: "./fastlane/AuthKey_H7FWG43W39.p8",
+      duration: 1200, # optional (maximum 1200)
+      in_house: false # optional but may be required if using match/sigh
+    )
+    match(
+      api_key: api_key,
+      type: "development", 
+      force_for_new_devices: true
+    )
     build_app(
       workspace: "Sample.xcworkspace", 
       scheme: "Sample.Stage",
